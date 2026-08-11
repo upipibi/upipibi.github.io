@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a caravan — Caravan License Plate Game</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: linear-gradient(#f9bf73, #e17344);
+    color: #1a1a1a;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  main {
+    background: #faf7f0;
+    border-radius: 18px;
+    max-width: 26rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,.25);
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 .5rem; }
+  .plate {
+    display: inline-block;
+    background: #f6f1e0;
+    border: 3px solid #14386b;
+    border-radius: 12px;
+    padding: .6rem 1rem;
+    font: 700 1.35rem/1 ui-monospace, Menlo, monospace;
+    letter-spacing: .08em;
+    color: #14386b;
+    margin: 1rem 0;
+    user-select: all;
+  }
+  p { color: #444; line-height: 1.5; }
+  .small { font-size: .85rem; color: #777; }
+</style>
+</head>
+<body>
+<main>
+  <h1>You're invited to a caravan!</h1>
+  <p>Someone wants you in their group on <strong>Caravan License Plate Game</strong> — the road-trip game for spotting license plates from all 50 states.</p>
+  <div class="plate" id="code">— — —</div>
+  <p id="hint">If you have the app installed, opening this link on your iPhone joins automatically. Otherwise, install the app, then tap <em>Caravan → New Caravan → Join</em> and enter the code above.</p>
+  <p class="small">Caravan License Plate Game is currently in TestFlight — ask the person who invited you for a tester invite.</p>
+</main>
+<script>
+  // The invite code travels in the URL fragment, which never reaches any
+  // server log. Rendered client-side only.
+  const raw = (location.hash || "").replace(/^#/, "").toUpperCase();
+  const clean = raw.replace(/[^A-Z2-9]/g, "");
+  if (clean.length === 12) {
+    document.getElementById("code").textContent =
+      clean.slice(0, 4) + "-" + clean.slice(4, 8) + "-" + clean.slice(8, 12);
+  } else {
+    document.getElementById("code").textContent = "code missing";
+    document.getElementById("hint").textContent =
+      "This invite link is incomplete — ask for a fresh one.";
+  }
+</script>
+</body>
+</html>

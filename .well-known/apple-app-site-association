@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["TQ6Y49W7UW.com.aaronlarson.licenseplategame"],
+        "components": [
+          { "/": "/caravan/*" }
+        ]
+      }
+    ]
+  }
+}
