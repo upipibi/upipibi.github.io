@@ -50,9 +50,11 @@
   <p class="small">Caravan License Plate Game is currently in TestFlight — ask the person who invited you for a tester invite.</p>
 </main>
 <script>
-  // The invite code travels in the URL fragment, which never reaches any
-  // server log. Rendered client-side only.
-  const raw = (location.hash || "").replace(/^#/, "").toUpperCase();
+  // Our own invite links put the code in the URL fragment, which never reaches
+  // any server log. Game Center's party-code fallback instead appends it as a
+  // ?c= query parameter, so accept either.
+  const params = new URLSearchParams(location.search);
+  const raw = ((location.hash || "").replace(/^#/, "") || params.get("c") || "").toUpperCase();
   const clean = raw.replace(/[^A-Z2-9]/g, "");
   if (clean.length === 12) {
     document.getElementById("code").textContent =
